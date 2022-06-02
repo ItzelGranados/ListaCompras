@@ -1,6 +1,8 @@
 let contador = 0;
 let costoTotal = 0;
 
+let totalEnProductos = 0;
+
 let element = document.getElementById("totalPrecio");
 element.innerHTML = "Total en Precio";
 
@@ -59,8 +61,6 @@ function validarCantidad() {
 } //validar cantidad
 
 let agregar = document.getElementById("btnAgregar");
-
-
 agregar.addEventListener("click", (event) => {
     event.preventDefault();
 
@@ -89,8 +89,12 @@ agregar.addEventListener("click", (event) => {
     document.getElementById("alertValidaciones").style.display = "none";
     contador++;
     document.getElementById("contadorProductos").innerHTML = contador;
+
     let precio = (Math.floor((Math.random() * 50) * 100)) / 100;
     let cantidad = parseFloat(txtNumber.value);
+
+    totalEnProductos = Math.ceil(cantidad);
+    document.getElementById("productosTotal").innerHTML = totalEnProductos;
     costoTotal += (precio * cantidad);
     total.innerHTML = ` $ ${costoTotal}`;
 
