@@ -143,5 +143,5 @@ window.addEventListener("load", function() {
 
     if (localStorage.getItem("elementosTabla") != null) {
         JSON.parse(this.localStorage.getItem("elementosTabla"));
-    }
+    } //if 
 });
