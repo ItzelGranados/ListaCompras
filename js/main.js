@@ -11,6 +11,9 @@ let cuerpoTabla = tabla.getElementsByTagName("tbody");
 let agregar = document.getElementById("btnAgregar");
 
 
+// 
+let datos = [];
+
 //Función para validar el nombre
 function validarNombre() {
     if (txtNombre.value.length < 3) {
@@ -82,6 +85,20 @@ agregar.addEventListener("click", (event) => {
     localStorage.setItem("precioTotal", costoTotal.toFixed(2));
 
 
+    //JSON
+    let elemento = `{
+        "id": ${contador},
+        "nombre": "${txtNombre}",
+        "cantidad": "${txtNumber}",
+        "precio": ${precio}
+    }`;
+
+    datos.push(JSON.parse(elemento));
+    localStorage.setItem("elementosTabla", JSON.stringify(datos));
+    console.log(datos);
+
+
+
 
     let tmp = `<tr>
         <th scope="row">${contador}</th>
@@ -114,12 +131,17 @@ window.addEventListener("load", function() {
         contador = parseInt(localStorage.getItem("contadorProductos"));
         document.getElementById("contadorProductos").innerHTML = contador;
     } //if contadorProductos
-    if (localStorage.getItem("productosTotal")) {
+    if (localStorage.getItem("productosTotal") != null) {
         totalEnProductos = parseInt(localStorage.getItem("productosTotal"));
         document.getElementById("productosTotal").innerHTML = totalEnProductos;
     } //if productosTotal
-    if (localStorage.getItem("precioTotal")) {
+    if (localStorage.getItem("precioTotal") != null) {
         costoTotal = parseInt(localStorage.getItem("precioTotal"));
         total.innerHTML = costoTotal;
     } //if precioTotal
+
+
+    if (localStorage.getItem("elementosTabla") != null) {
+        JSON.parse(this.localStorage.getItem("elementosTabla"));
+    }
 });
